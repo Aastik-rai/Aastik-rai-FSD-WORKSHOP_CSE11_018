@@ -101,7 +101,7 @@ const server = http.createServer((req, res) => {
     }
 
     else if(url==="/update" && method==="PUT"){
-        
+
     }
 
     else {
