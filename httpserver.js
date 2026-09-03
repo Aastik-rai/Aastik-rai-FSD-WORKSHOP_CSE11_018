@@ -100,9 +100,26 @@ const server = http.createServer((req, res) => {
         });
     }
 
-    else if(url==="/update" && method==="PUT"){
+    else if (url.startsWith("/delete/") && method === "DELETE") {
 
+    const id = url.split("/")[2];
+
+    const index = users.findIndex((u) => u.id == id);
+
+    if (index == -1) {
+        return res.end("Element not found");
     }
+
+    users.splice(index, 1);
+
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+
+    res.end(JSON.stringify({
+        message: "User deleted successfully",
+        users: users
+    }));
+  }
 
     else {
 
