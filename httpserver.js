@@ -120,6 +120,43 @@ const server = http.createServer((req, res) => {
         users: users
     }));
   }
+  // UPDATE user
+else if (url.startsWith("/update/") && method === "PUT") {
+
+    const id = url.split("/")[2];
+
+    const index = users.findIndex((u) => u.id == id);
+
+    if (index == -1) {
+        res.statusCode = 404;
+        return res.end("User not found");
+    }
+
+    let body = "";
+
+    req.on("data", (content) => {
+        body += content;
+    });
+
+    req.on("end", () => {
+
+        const updatedUser = JSON.parse(body);
+
+        users[index] = {
+            ...users[index],
+            ...updatedUser,
+            id: users[index].id
+        };
+
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+
+        res.end(JSON.stringify({
+            message: "User updated successfully",
+            user: users[index]
+        }));
+    });
+}
 
     else {
 
