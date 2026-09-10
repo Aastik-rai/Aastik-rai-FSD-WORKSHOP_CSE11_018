@@ -48,7 +48,7 @@ app.get("/user",(req,res)=>{
 
 app.post("/create",(req,res)=>{
     try{
-        const{id,name,email}=req.body;
+        const{name,email}=req.body;
         const newUser={
             id:userData.length+1,
             name,
