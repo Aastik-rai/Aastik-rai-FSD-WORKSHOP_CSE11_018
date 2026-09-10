@@ -9,5 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aastik-rai/Aastik-rai-FSD-WORKSHOP_CSE11_018.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aastik-rai/Aastik-rai-FSD-WORKSHOP_CSE11_018/issues"
+  },
+  "homepage": "https://github.com/Aastik-rai/Aastik-rai-FSD-WORKSHOP_CSE11_018#readme"
 }
