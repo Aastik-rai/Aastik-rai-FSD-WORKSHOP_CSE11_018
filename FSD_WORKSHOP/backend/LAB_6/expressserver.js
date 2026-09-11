@@ -93,11 +93,26 @@ app.post("/create",(req,res)=>{
 // });
 
 
-// app.get("/edit/:id",(req,res)=>{
-//     res.status(200).json({
-//         message:"welcome to express server ",
-//     });
-// });
+app.put("/edit/:id", (req, res) => {
+    try {
+        const id = req.params.id;
+        const { name, email } = req.body;
+        const userIndex = userData.findIndex((u) => u.id == id);
+        if (userIndex === -1) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        userData[userIndex] = {
+            id,
+            name,
+            email
+        };
+        return res.status(200).json({ message: "User updated successfully", user: userData[userIndex] });
+    } catch (err) {
+        console.log("error:", err.message);
+       
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}); 
 
 
 // app.post("/login",(req,res)=>{
