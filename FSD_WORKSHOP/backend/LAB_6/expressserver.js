@@ -1,5 +1,10 @@
 import express from "express";
+// import dotenv from "dotenv";
+// import cors from "cors";
+// dotenv.config();
+
 const app =express();
+app.use(express.json()); //to set a middleware called express.json  
 const port=3000
 const userData=[
     {
@@ -10,7 +15,7 @@ const userData=[
     },
     {
         id: 2,
-        name: "Abhay singhi",
+        name: "Abhay singh",
         phone: "7845336087",
         email: "Abhay@gmail.com"
     },
@@ -22,9 +27,9 @@ const userData=[
     },
     {
         id: 4,
-        name: "Aayush sharma 2",
-        phone: "7829326087",
-        email: "Aayush@gmail.com"
+        name: "Abhishek dubey",
+        phone: "7827893273",
+        email: "dubey@gmail.com"
     }
 
     
@@ -46,6 +51,21 @@ app.get("/user",(req,res)=>{
 });
 
 
+app.get("/user/:id",(req,res)=>{
+    try{
+        const id=req.params.id;
+        const user=userData.find((u) => u.id==id);
+        if(!user){
+            return res.status(400).json({message:"user not found "})
+        }
+        res.status(200).json({message:"data recieved",user});
+
+    }catch(err){
+        console.log("error",err.message);
+    }   
+});
+
+
 app.post("/create",(req,res)=>{
     try{
         const{name,email}=req.body;
@@ -61,6 +81,7 @@ app.post("/create",(req,res)=>{
 
     }catch(err){
         console.log("error",err.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
@@ -70,17 +91,19 @@ app.post("/create",(req,res)=>{
 //         message:"welcome to express server ",
 //     });
 // });
-// app.get("/user/:id",(req,res)=>{
-//     res.status(200).json({
-//         message: "abs",
-//     });
-// });
+
 
 // app.get("/edit/:id",(req,res)=>{
 //     res.status(200).json({
 //         message:"welcome to express server ",
 //     });
 // });
+
+
+// app.post("/login",(req,res)=>{
+
+// });
+
 
 
 
